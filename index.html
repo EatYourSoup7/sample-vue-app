@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Vue.js Intro</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>{{ headerSentence }}</h1>
+      <p>{{ message }}</p>
+      <button v-on:click="toggleExtraInfo">Toggle Extra Info</button>
+
+      <p v-if="showExtraInformation">Extra Info</p>
+      
+      <div><input type="text" v-model="headerSentence"></div>
+      <h6>{{ headerSentence }}</h6>
+      <!-- <button v-on:click="changeMessage()">Click Me</button> -->
+      <ul>
+        <li v-for="fruit in fruits">{{ fruit }}</li>
+      </ul>
+      <input type="text" v-model="newFruit">
+      <button v-on:click="addFruit()">Add Fruit</button>
+    <!--   <input type="text" v-model="badFruit">
+      <button v-on:click="deleteFruit()">Delete Fruit</button> -->
+      <br>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!", 
+          headerSentence: "Welcome!",
+          showExtraInformation: true, 
+          fruits: ["apple", "orange", "pear", "avocado"],
+          newFruit: "",
+          // badFruit: ""
+        },
+        methods: {
+          changeMessage: function() {
+            this.message = "Whoa...";
+          }, 
+          toggleExtraInfo: function() {
+            // if (this.showExtraInformation) {
+            //   this.showExtraInformation = false;
+            // } else {
+            //   this.showExtraInformation = true;
+            // }
+            this.showExtraInformation = !this.showExtraInformation;
+          },
+          addFruit: function() {
+            this.fruits.push(this.newFruit);
+          },
+          // deleteFruit: function() {
+          //   this.fruits.delete(this.badFruit);
+          // }
+
+        
+        }
+      });
+    </script>
+
+  </body>
+
+</html>
+
+
+
+<!-- 4-function calculator - code below: -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Intro</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+    <div>1st number: <input type="text" id="number_1"></div>
+    <div>2nd number: <input type="text" id="number_2"></div>
+    <div>3rd number: <input type="text" id="number_3"></div>
+    <br>
+    <div><button v-on:click="changeSum()">Compute sum</button></div>
+    <div><button v-on:click="changeDifference()">Compute difference</button></div>
+    <div><button v-on:click="changeProduct()">Compute product</button></div>
+    <div><button v-on:click="changeDivision()">Compute division</button></div>
+    <p>The result is: </p>
+    <h1>{{ sum }}{{ difference }}{{ product }}{{ division }}</h1>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue!", 
+        sum: "",
+        difference: "",
+        product: "",
+        division: ""
+      },
+      methods: {
+        changeSum: function() {
+          this.sum = Number(number_1.value) + Number(number_2.value) + Number(number_3.value);
+        }, 
+        changeDifference: function() {
+          this.difference = Number(number_1.value) - Number(number_2.value) - Number(number_3.value);
+        },
+        changeProduct: function() {
+          this.product = Number(number_1.value) * Number(number_2.value) * Number(number_3.value);
+        },
+        changeDivision: function() {
+          this.product = Number(number_1.value) / Number(number_2.value) / Number(number_3.value);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+ -->
+<!-- live update sum - code below: -->
+<!--  <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>Vue.js Intro</title>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ </head>
+ <body>
+   <div id="app">
+     {{ message }}
+     <div>1st number: <input type="text" v-model="number1"></div>
+     <div>2nd number: <input type="text" v-model="number2"></div>
+     <div>3rd number: <input type="text" v-model="number3"></div>
+     <div><button v-on:click="computeSum()">Compute sum</button></div>
+     <p>The result is: </p>
+     <h1>{{ Number(this.number1) + Number(this.number2) + Number(this.number3) }}</h1>
+   </div>
+   <script>
+     var app = new Vue({
+       el: "#app",
+       data: {
+         message: "Hello Vue!",
+         number1: 0, 
+         number2: 0,
+         number3: 0
+       },
+       methods: {
+
+       
+        }
+     });
+   </script>
+ </body>
+ </html> -->

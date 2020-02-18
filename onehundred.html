@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Intro</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Guess a number!</h1>
+    <div>
+      <input type="text" v-model="guess">
+      <button v-on:click="checkAnswer()">Submit</button>
+      <button v-on:click="resetNumber()">Play again</button>
+    </div>
+    <div>
+      <h1>{{ message }}</h1>
+      <img src="https://media.giphy.com/media/44gu1V41ejJni/giphy.gif" v-if="correct">
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "HELLO",
+        number: 99,
+        guess: null,
+        correct: false
+      },
+      methods: {
+        checkAnswer: function() {
+          if (Number(this.guess) === this.number) {
+            this.message = "You win!"
+            this.correct = true
+          }
+          else if (Number(this.guess) > this.number) {
+            this.message = "Too high!"
+          }
+          else {
+            this.message = "Too low!"
+          }
+        },
+        resetNumber: function() {
+          this.number = Math.floor(Math.random() * 10) + 1
+          this.correct = false
+          this.message = ""
+          this.guess = ""
+        }
+      
+      }
+    });
+
+  </script>
+</body>
+</html>
