@@ -2,48 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>Vue.js Intro</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="onehundred.css">
+
 </head>
-<body>
-  <div id="app">
-    <h1>Guess a number!</h1>
-    <div>
-      <input type="text" v-model="guess">
-      <button v-on:click="checkAnswer()">Submit</button>
-      <button v-on:click="resetNumber()">Play again</button>
+<body> 
+  <div class="container">
+    <div id="app">
+      <h1>Guess a number!</h1>
+      <div>
+        <input type="text" v-model="guess">
+        <button v-on:click="checkAnswer()" type="button" class="btn btn-primary">Submit</button>
+        <button v-on:click="resetNumber()" type="button" class="btn btn-secondary">Play again</button>
+      </div>
+      <div>
+        <h1>{{ message }}</h1>
+        <img src="https://media.giphy.com/media/44gu1V41ejJni/giphy.gif" v-if="correct" width=400>
+        <img src="https://media.giphy.com/media/SgJfvOrDxTTc4/giphy.gif" v-if="high" width=400>
+        <img src="https://media.giphy.com/media/wdh1SvEn0E06I/giphy.gif" v-if="low" width=400>
+      </div>
     </div>
-    <div>
-      <h1>{{ message }}</h1>
-      <img src="https://media.giphy.com/media/44gu1V41ejJni/giphy.gif" v-if="correct">
-    </div>
+    
   </div>
 
   <script>
     var app = new Vue({
       el: "#app",
       data: {
-        message: "HELLO",
-        number: 99,
+        message: "",
+        number: Math.floor(Math.random() * 100) + 1,
         guess: null,
-        correct: false
+        correct: false, 
+        high: false,
+        low: false
+
       },
       methods: {
         checkAnswer: function() {
           if (Number(this.guess) === this.number) {
-            this.message = "You win!"
+            this.message = "Hell yeah brother - you win!"
             this.correct = true
+            this.high = false
+            this.low = false
           }
           else if (Number(this.guess) > this.number) {
-            this.message = "Too high!"
+            this.message = "You got too high!"
+            this.high = true
+            this.correct = false
+            this.low = false
           }
           else {
-            this.message = "Too low!"
+            this.message = "Bad aim - too low!"
+            this.high = false
+            this.correct = false
+            this.low = true
           }
         },
         resetNumber: function() {
-          this.number = Math.floor(Math.random() * 10) + 1
+          this.number = Math.floor(Math.random() * 100) + 1
           this.correct = false
+          this.high = false
+          this.low = false
           this.message = ""
           this.guess = ""
         }
